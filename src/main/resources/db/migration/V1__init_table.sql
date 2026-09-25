@@ -1,0 +1,6 @@
+CREATE TABLE example
+(
+    id   BIGINT GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255),
+    PRIMARY KEY (id)
+);
