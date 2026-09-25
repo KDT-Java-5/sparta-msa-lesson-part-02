@@ -11,8 +11,8 @@ spring:
         # 2. Base URL: Google Gemini가 제공하는 OpenAI 호환 API 주소입니다.
         base-url: "https://generativelanguage.googleapis.com/v1beta/openai/"
         options:
-          # 모델명: 현재 가장 최신/경량 모델인 gemini-2.0-flash-lite 등을 지정합니다.
-          model: "gemini-2.5-flash-lite"
+          # 모델명: 현재 가장 최신/경량 모델인 gemini-3.5-flash-lite 등을 지정합니다.
+          model: "gemini-3.5-flash-lite"
           # 온전성(Temperature): 0.0은 가장 보수적이고 사실적인 답변을 생성합니다.
           # (분석, 요약, 데이터 추출에 최적화된 설정)
           temperature: 0.7
