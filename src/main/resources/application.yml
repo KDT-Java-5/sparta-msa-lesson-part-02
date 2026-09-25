@@ -1,0 +1,78 @@
+spring:
+  application:
+    name: lesson
+
+  autoconfigure:
+    exclude:
+      - org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
+
+  ai:
+    openai:
+      # 1. API 키: Google AI Studio에서 발급받은 키를 입력합니다.
+      # ${GOOGLE_AI_GEMINI_API_KEY}
+      api-key: GOOGLE_AI_GEMINI_API_KEY
+      embedding:
+        base-url: https://generativelanguage.googleapis.com/v1beta/openai/
+        options:
+          model: gemini-embedding-001
+      chat:
+        # 2. Base URL: Google Gemini가 제공하는 OpenAI 호환 API 주소입니다.
+        base-url: "https://generativelanguage.googleapis.com/v1beta/openai/"
+        options:
+          # 모델명: 현재 가장 최신/경량 모델인 gemini-2.0-flash-lite 등을 지정합니다.
+          model: "gemini-2.5-flash-lite"
+          # 온전성(Temperature): 0.0은 가장 보수적이고 사실적인 답변을 생성합니다.
+          # (분석, 요약, 데이터 추출에 최적화된 설정)
+          temperature: 0.7
+
+        # 4. 엔드포인트 경로: 대화형 API를 호출하기 위한 표준 경로입니다.
+        completions-path: "/chat/completions"
+
+    # --- [추가] pgvector 설정 ---
+    vectorstore:
+      pgvector:
+        initialize-schema: false          # 직접 SQL로 테이블을 만들었으므로 false 권장
+        dimensions: 3072                  # 임베딩 모델 최적화 차원
+        distance-type: COSINE_DISTANCE    # 유사도 계산 방식 (cosine, l2, inner_product)
+        index-type: hnsw                  # 고속 검색을 위한 인덱스 방식
+
+  
+  # 데이터베이스 연결 설정
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sparta
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  # JPA 및 Hibernate 설정
+  jpa:
+    hibernate:
+      # ddl-auto: 애플리케이션 실행 시 스키마(테이블) 처리 전략
+      # none: 아무 작업도 하지 않음 (운영 환경 추천)
+      # create: 기존 테이블 삭제 후 다시 생성
+      # update: 변경된 부분만 반영
+      ddl-auto: none
+    properties:
+      hibernate:
+        # postgreSQL 버전에 맞는 Dialect(방언) 설정
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # Flyway 설정
+  flyway:
+    enabled: true # Flyway 활성화
+    locations: classpath:db/migration # 마이그레이션 파일 위치 지정
+
+# 로깅 레벨 설정
+logging:
+  level:
+    # Hibernate가 실행하는 SQL 쿼리를 DEBUG 레벨로 로그에 출력
+    org.hibernate.SQL: DEBUG
+
+# 내장 웹 서버 설정
+server:
+  port: 8080
+
+# Swagger UI 설정 (Springdoc)
+springdoc:
+  swagger-ui:
+    enabled: true
