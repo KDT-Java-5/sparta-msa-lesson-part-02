@@ -7,14 +7,21 @@ spring:
       - org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
 
   ai:
+    model:
+      embedding: google-genai
+
+    google:
+      genai:
+        embedding:
+          api-key: ${spring.ai.openai.api-key}
+          text:
+            options:
+              model: gemini-embedding-001
+
     openai:
       # 1. API 키: Google AI Studio에서 발급받은 키를 입력합니다.
       # ${GOOGLE_AI_GEMINI_API_KEY}
       api-key: GOOGLE_AI_GEMINI_API_KEY
-      embedding:
-        base-url: https://generativelanguage.googleapis.com/v1beta/openai/
-        options:
-          model: gemini-embedding-001
       chat:
         # 2. Base URL: Google Gemini가 제공하는 OpenAI 호환 API 주소입니다.
         base-url: "https://generativelanguage.googleapis.com/v1beta/openai/"
