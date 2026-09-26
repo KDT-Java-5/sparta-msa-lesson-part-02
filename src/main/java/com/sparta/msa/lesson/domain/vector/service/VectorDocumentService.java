@@ -64,7 +64,13 @@ public class VectorDocumentService {
   // 2. 문서 분할 로직 (추상화)
   private List<Document> createChunks(String content, VectorDocument entity) {
     // TokenTextSplitter 설정: (토큰수, 오버랩, 최소문장고정, 최대반복, 유무선 구분)
-    TextSplitter splitter = new TokenTextSplitter(500, 100, 5, 10000, true);
+    TextSplitter splitter = TokenTextSplitter.builder()
+        .withChunkSize(500)
+        .withMinChunkSizeChars(100)
+        .withMinChunkLengthToEmbed(5)
+        .withMaxNumChunks(10000)
+        .withKeepSeparator(true)
+        .build();
 
     // 공통 메타데이터 생성
     Map<String, Object> metadata = Map.of(
