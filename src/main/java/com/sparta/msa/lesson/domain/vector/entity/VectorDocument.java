@@ -58,14 +58,12 @@ public class VectorDocument {
 
   @Builder
   public VectorDocument(
-      UUID id,
       String fileName,
       String content,
       String contentType,
       String metadata,
       Integer chunkCount
   ) {
-    this.id = id;
     this.fileName = fileName;
     this.content = content;
     this.contentType = contentType;
