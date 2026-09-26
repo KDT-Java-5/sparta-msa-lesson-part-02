@@ -11,7 +11,6 @@ import org.springframework.ai.chat.client.ChatClientRequest;
 import org.springframework.ai.chat.client.ChatClientResponse;
 import org.springframework.ai.chat.client.advisor.api.AdvisorChain;
 import org.springframework.ai.chat.client.advisor.api.BaseAdvisor;
-import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.MessageType;
 import org.springframework.ai.chat.messages.UserMessage;
@@ -69,8 +68,7 @@ public class ChatMemoryAdvisor implements BaseAdvisor {
 
     // 2. AI 응답 저장
     if (response.chatResponse() != null && response.chatResponse().getResult() != null) {
-      var output = response.chatResponse().getResult().getOutput();
-      history.add(new AssistantMessage(output.getText(), output.getMetadata()));
+      history.add(response.chatResponse().getResult().getOutput());
     }
 
     // 3. FIFO 용량 관리

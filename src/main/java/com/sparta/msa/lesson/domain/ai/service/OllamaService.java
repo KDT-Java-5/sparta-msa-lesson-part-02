@@ -25,8 +25,7 @@ public class OllamaService {
         .system(systemPrompt)
         .user(message)
         .options(OpenAiChatOptions.builder()
-            .temperature(temperature)
-            .build())
+            .temperature(temperature))
         .call()
         .content();
   }

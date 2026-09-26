@@ -91,8 +91,7 @@ public class AiChatController {
         .user("다음 주제로 창의적인 이야기를 작성해주세요: " + topic)
         .options(ChatOptions.builder()
             .temperature(0.9)  // 1.0에 가까울수록 창의적(랜덤성 증가)
-            .maxTokens(500)    // 답변의 최대 길이 제한
-            .build())
+            .maxTokens(500))   // 답변의 최대 길이 제한
         .call()
         .content();
   }
@@ -103,8 +102,7 @@ public class AiChatController {
         .user("다음 텍스트를 핵심 위주로 요약해주세요: " + text)
         .options(ChatOptions.builder()
             .temperature(0.1)  // 0.0에 가까울수록 일관적이고 사실적
-            .maxTokens(200)
-            .build())
+            .maxTokens(200))
         .call()
         .content();
   }
