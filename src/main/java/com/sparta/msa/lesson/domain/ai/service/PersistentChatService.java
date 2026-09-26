@@ -90,7 +90,6 @@ public class PersistentChatService {
 
     return chatConversationRepository.save(
         ChatConversation.builder()
-            .id(UUID.randomUUID())
             .title(title)
             .build());
   }
