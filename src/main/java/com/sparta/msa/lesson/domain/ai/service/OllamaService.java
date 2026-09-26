@@ -2,7 +2,7 @@ package com.sparta.msa.lesson.domain.ai.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.ollama.api.OllamaOptions;
+import org.springframework.ai.ollama.api.OllamaChatOptions;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,9 +24,8 @@ public class OllamaService {
     return chatClient.prompt()
         .system(systemPrompt)
         .user(message)
-        .options(OllamaOptions.builder()
-            .temperature(temperature)
-            .build())
+        .options(OllamaChatOptions.builder()
+            .temperature(temperature))
         .call()
         .content();
   }
