@@ -44,10 +44,8 @@ public class ChatConversation {
 
   @Builder
   public ChatConversation(
-      UUID id,
       String title
   ) {
-    this.id = id;
     this.title = title;
   }
 }
